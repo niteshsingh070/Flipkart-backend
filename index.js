@@ -14,7 +14,7 @@ app.use(authRoutes);
 app.use(cartRoutes);
 
 mongoose.connect(
-  "mongodb+srv://anshulojha1214:fY8vsuBKjs9Z1Bs4@cluster0.e0a7mlr.mongodb.net/ecommerce",
+  "mongodb+srv://Nitesh07:Batmen1234@cluster0.dvseat3.mongodb.net/ecommerce",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
