@@ -87,4 +87,31 @@ module.exports = router;
 // router.delete("/cart/:id",async(req,res)=>{
 //     //check if items is there in the cart,-do the delete operation.
 //     //if item is not there-err to user
-// })
+//
+// DELETE /cart/:userId/:productId
+router.delete("/cart/:userId/:productId", async (req, res) => {
+  try {
+    const { userId, productId } = req.params;
+
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      return res.status(404).json({ success: false, message: "Cart not found" });
+    }
+
+    const itemIndex = cart.items.findIndex(
+      i => String(i.productId) === String(productId)
+    );
+
+    if (itemIndex === -1) {
+      return res.status(404).json({ success: false, message: "Item not found in cart" });
+    }
+
+    cart.items.splice(itemIndex, 1);
+    await cart.save();
+
+    return res.json({ success: true, data: cart });
+  } catch (error) {
+    console.error("Error deleting cart item:", error);
+    return res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
