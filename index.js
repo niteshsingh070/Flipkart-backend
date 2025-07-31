@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 const { router: authRoutes, authenticateJWT } = require("./auth");
 const cartRoutes = require("./cart");
 app.use(authRoutes);
-app.use(cartRoutes);
+app.use("/", cartRoutes);
 
 mongoose.connect(
   "mongodb+srv://Nitesh07:Batmen1234@cluster0.dvseat3.mongodb.net/ecommerce",
